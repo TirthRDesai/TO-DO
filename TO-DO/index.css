@@ -249,7 +249,7 @@ body::-webkit-scrollbar,body::-webkit-scrollbar-button{
     position: fixed;
     z-index: 10000;
     width: 150px;
-    background-color: #f9e5d7;
+    background-color: rgba(0, 0, 0, 0.5);
     display: none;
     border-radius: 5px;
 }
@@ -257,9 +257,9 @@ body::-webkit-scrollbar,body::-webkit-scrollbar-button{
     padding: 8px 10px;
     font-size: 20px;
     font-family: 'Bookman Old Style';
-    cursor: pointer;
+    cursor: pointer; 
     text-align: center;
-    color: 	#243381;
+    color: 	yellow;
     font-weight: bolder;
     border-radius: inherit;
 }
