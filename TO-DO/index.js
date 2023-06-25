@@ -1,6 +1,6 @@
 window.onload = function(){
     
-    if(localStorage.length<3){
+    if(localStorage.getItem('email')==null){
         logout_user(1,1000);
     }
 
