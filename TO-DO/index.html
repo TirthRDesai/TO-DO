@@ -80,16 +80,15 @@
                 <div class="new_list_div sectiondiv" id="new_list_div" onclick="addnewlist();">
                     <i class="fa-regular fa-plus myicon"></i>    
                     <span class="textspan">New List</span>
-                    <!-- <i class = ""></i>-->
                 </div>
                 
                 <i class="fa-duotone fa-gear gearicon" onclick="console.log('hi');"></i>
             </td>
             
-            <td class="add_task_td" id = "add_task_td" onclick="document.getElementById('add_task_input').focus();">
+            <td class="add_task_td" id = "add_task_td" onclick="document.getElementById('add_task_input').focus(); ">
                 <i class="fa-light fa-circle searchcircle" style="color: gray;"></i>
-                <input type="text" id = "add_task_input">
-                <!-- <div id = sendicon_div></div> -->
+                <input type="text" id = "add_task_input" onkeydown="enter_input(event);">
+
             </td>
         </tr>
 

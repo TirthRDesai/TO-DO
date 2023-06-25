@@ -62,7 +62,7 @@ window.onload = function(){
     document.getElementById("disp_name").innerHTML = localStorage.getItem("fullname");
     document.getElementById("disp_email").innerHTML = localStorage.getItem("email");
 
-    document.getElementById("add_task_td").innerHTML+="<i class = 'fa-sharp fa-light fa-paper-plane-top' id = 'sendicon' onclick = 'add_task();'></i>"
+    document.getElementById("add_task_td").innerHTML+="<i class = 'fa-sharp fa-light fa-paper-plane-top' id = 'sendicon' onclick = 'add_task();'></i>";
 
     show_task_region("My Day", "-");
 
@@ -642,9 +642,8 @@ function show_task_region(selected_region,task){
         let task_holder_div = document.createElement("div");
         task_holder_div.className = "task_holder_div";
         
-
-        let incomplete_ul_code = "<ul class = 'incomplete_task_ul'><center>";
-        let completed_ul_code = "<ul class = 'completed_task_ul'><center>";
+        let incomplete_ul_code = "<ul  id = 'incomplete_task_ul' class = 'incomplete_task_ul'><center>";
+        let completed_ul_code = "<ul id = 'incomplete_task_ul' class = 'completed_task_ul'><center>";
 
         if (task!= "0"){
             var completed_task = task[0].split("#;#");
@@ -672,6 +671,9 @@ function show_task_region(selected_region,task){
     
         }
         else{
+            incomplete_ul_code += "</center></ul>";
+            completed_ul_code += "</center></ul";
+            task_holder_div.innerHTML += incomplete_ul_code+completed_ul_code;
             document.getElementById('show_tasks').appendChild(task_holder_div);
         }
     }
@@ -684,18 +686,29 @@ function show_task_region(selected_region,task){
     
 }
 
-// function add_task(){
-//     var selected_region = localStorage.getItem('selected');
-    
-// }
+function add_task(){
+    // var selected_region = localStorage.getItem('selected');
+    var incomplete_task = document.getElementById('add_task_input').value;
+    incomplete_task = incomplete_task.trim();
+    if (incomplete_task != ""){
+        var incomplete_task_ul = document.getElementById('incomplete_task_ul');
+        var li_code = "<li class = 'incomplete_task_li'  onclick = 'li_clicked(this);'>"+incomplete_task+"</li>";
+        incomplete_task_ul.innerHTML += "<center>"+li_code+"</center>";
+        document.getElementById('add_task_input').value = "";
+    }
+}
+
+function enter_input(event){
+    if (event.key == "Enter"){
+        add_task();
+    }
+}
 
 function li_clicked(data){
-    if(data.id.includes('I')){
-        data.id = data.id.slice(1,);
+    if(data.className == "incomplete_task_li"){
         data.className = "completed_task_li";
     }
     else{
         data.className = "incomplete_task_li";
-        data.id = "I" + data.id;
     }
 }
