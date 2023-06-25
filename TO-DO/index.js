@@ -85,9 +85,9 @@ function open_context_menu(){
     const contextMenu = document.getElementById('context_menu');
     const myscope = document.getElementsByClassName("new_list");
     const predefined_list = document.getElementsByClassName('predefined_list');
-    const incomplete_task_li = document.getElementsByClassName('inc_li_div');
+    const incomplete_task_li = document.getElementsByClassName('incomplete_task_li');
     const predef_context_menu = document.getElementById('Note_Context_Menu');
-    const completed_task_li = document.getElementsByClassName('com_li_div');
+    const completed_task_li = document.getElementsByClassName('completed_task_li');
     const list_menu = document.getElementById('li_menu');
 
     for(i = 0; i<myscope.length;i++){
@@ -686,7 +686,7 @@ function show_task_region(selected_region,task){
             // CREATING INCOMPLETE TASKS LIST
             let li_code = "";
             for (i=0;i<incomplete_task.length-1;i++){
-                li_code += "<div class = 'inc_li_div'><li id = IC"+(i+1)+" class = 'incomplete_task_li' onclick = 'li_clicked(this);'>"+incomplete_task[i]+"</li></div>";
+                li_code += "<li id = IC"+(i+1)+" class = 'incomplete_task_li' onclick = 'li_clicked(this);'>"+incomplete_task[i]+"</li>";
             }
     
             incomplete_ul_code +=li_code+"</center></ul>";
@@ -696,7 +696,7 @@ function show_task_region(selected_region,task){
     
             li_code = "";
             for (i=0;i<completed_task.length-1;i++){
-                li_code += "<div class = 'com_li_div'><li id = C"+(i+1)+" class = 'completed_task_li' onclick = 'li_clicked(this);'>"+completed_task[i]+"</li></div>";
+                li_code += "<li id = C"+(i+1)+" class = 'completed_task_li' onclick = 'li_clicked(this);'>"+completed_task[i]+"</li>";
             }
     
             completed_ul_code += li_code+"</center></ul>";
@@ -731,6 +731,7 @@ function add_task(){
         to_be_added_task.innerHTML = li_code+to_be_added_task.innerHTML;
 
         document.getElementById('add_task_input').value = "";
+        open_context_menu();
     }
 }
 
@@ -743,10 +744,28 @@ function enter_input(event){
 function li_clicked(data){
     if(data.className == "incomplete_task_li"){
         data.className = "completed_task_li";
+        updateDBValues(data,"C");
     }
     else{
         data.className = "incomplete_task_li";
+        updateDBValues(data, "IC");
     }
+}
+
+
+function updateDBValues(data, status){
+    var selected_region = localStorage.getItem('selected');
+    var email = localStorage.getItem('email');
+    jQuery.ajax({
+        type : 'POST',
+        data : {'email': email, 'selected' : selected_region, 'task' : data, 'status': status},
+        dataType: "html",
+        url: "updateDatabaseValues.php",
+        success : function(d){
+            console.log(d);
+        }
+
+    });
 }
 
 
