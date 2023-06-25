@@ -1,6 +1,6 @@
 window.onload = function(){
     
-    if(localStorage.length==0){
+    if(localStorage.length<3){
         logout_user(1,1000);
     }
 
