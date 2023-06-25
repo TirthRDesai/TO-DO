@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+</head>
+<body>
+    <button onclick="func()">CLICK</button>
+    <script>
+        jQuery.ajax({
+            type : 'POST',
+            data : {'hello': "HELLO"},
+            dataType:"html",
+            url: "test.php",
+            success : function(d){console.log(d);}
+        });
+    </script>
+</body>
+</html>

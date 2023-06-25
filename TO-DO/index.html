@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO</title>
+    
+
+    <link rel="stylesheet" href="index.css"> 
+    <!-- CSS -->
+
+    <!-- <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-8d95b745961f6b33ab3aa1b98a45291a.css?vsn=d"> -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" >
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles"/>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.min.css" integrity="sha512-yX1R8uWi11xPfY7HDg7rkLL/9F1jq8Hyiz8qF4DV2nedX4IVl7ruR2+h3TFceHIcT5Oq7ooKi09UZbI39B7ylw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <!-- JAVASCRIPTS -->
+
+    <script src="index.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.min.js" integrity="sha512-JbRQ4jMeFl9Iem8w6WYJDcWQYNCEHP/LpOA11LaqnbJgDV6Y8oNB9Fx5Ekc5O37SwhgnNJdmnasdwiEdvMjW2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+</head>
+<body id="body">
+    <!-- HIDDEN ITEMS -->
+    <input style="display: none;" id = "listclicked">
+    <div id = "context_menu" >
+        <div class="items" onclick = "rename_list();">Rename</div>
+        <div class="items" onclick = "delete_list();">Delete</div>
+    </div>
+    <div id = "Note_Context_Menu">
+        <div class = "note"><b>NOTE:</b><br>You Cannot Make Changes to Predefined Lists</div>
+    </div>
+    <img style="display: none;" id = "test_img">
+    
+    
+    <!-- FRONT END -->
+    <table class="outer_table" id = "outer_table">
+        <tr>
+            <!-- LEFT SIDE -->
+            <td class="outer_td" style="border-right: 2px solid green; width: 30%;background-color: #dddddd; overflow: hidden;max-height: 400px;">
+                <table class="inner_table" id="inner_table" >
+                    
+                    <tr>
+
+                        <td class="inner_td" id="first_inner_td" style="cursor: pointer;" onclick="disp_full_pic();">
+                            <img alt="profile_pic" id="pfp" >
+                            <div class="profile_div">
+                                <span class="name" id = "disp_name"></span><br>
+                                <span class = "email_id_display" id = "disp_email"></span>
+                            </div>
+                        </td>
+
+                    </tr>
+                    
+                    <div id = "all_list"></div>
+
+                </table>
+            </td>
+
+            <!-- RIGHT SIDE -->
+            <td style="position: absolute; height: 92%; width: 100%; padding: 0; overflow: hidden;" class="outer_td" id = "show_tasks_td" style="width: 100%;">
+                <div id = "show_tasks"></div>
+            </td>
+        </tr>
+        <tr>
+            
+            <td class="inner_td" id="new_list_inner_td" >
+                <div class="new_list_div sectiondiv" id="new_list_div" onclick="addnewlist();">
+                    <i class="fa-regular fa-plus myicon"></i>    
+                    <span class="textspan">New List</span>
+                    <!-- <i class = ""></i>-->
+                </div>
+                
+                <i class="fa-duotone fa-gear gearicon" onclick="console.log('hi');"></i>
+            </td>
+            
+            <td class="add_task_td" id = "add_task_td" onclick="document.getElementById('add_task_input').focus();">
+                <i class="fa-light fa-circle searchcircle" style="color: gray;"></i>
+                <input type="text" id = "add_task_input">
+                <!-- <div id = sendicon_div></div> -->
+            </td>
+        </tr>
+
+    </table>
+    
+</body>
+</html>
