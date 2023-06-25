@@ -429,7 +429,9 @@ function logout_user(i, mytimer){
         });
     }
     setTimeout(function(){
-        window.location.assign("login.php");
+        var url = window.location.href;
+        url.replace("index.html", "login.php")
+        window.location.assign(url);
     },mytimer+1000);
 }
 
