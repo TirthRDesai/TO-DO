@@ -4,9 +4,15 @@ window.onload = function(){
         logout_user(1,1000);
     }
 
+    document.getElementById("SETTINGS_ID_VALUE").innerHTML = localStorage.getItem('Id');
+    document.getElementById("SETTINGS_NAME_VALUE").innerHTML = localStorage.getItem('fullname');
+    document.getElementById("SETTINGS_EMAIL_VALUE").innerHTML = localStorage.getItem('email');
+    document.getElementById("SETTINGS_LOGIN_TYPE_VALUE").innerHTML = localStorage.getItem('login_type').toUpperCase();
 
-
-
+    var selected_list = localStorage.getItem('selected');
+    if(selected_list==null){
+        selected_list = "My Day";
+    }
     caches.keys().then((keyList) => Promise.all(keyList.map((key) => caches.delete(key))));
 
     
@@ -58,22 +64,23 @@ window.onload = function(){
         document.getElementById('all_list').innerHTML += code;
     }
 
-    document.getElementById("my_day_div").className += " selected";
+    document.getElementById(conv_name_to_id(selected_list)).className += " selected";
     document.getElementById("disp_name").innerHTML = localStorage.getItem("fullname");
     document.getElementById("disp_email").innerHTML = localStorage.getItem("email");
 
     document.getElementById("add_task_td").innerHTML+="<i class = 'fa-sharp fa-light fa-paper-plane-top' id = 'sendicon' onclick = 'add_task();'></i>";
 
-    show_task_region("My Day", "-");
+    show_task_region(selected_list, "-");
 
-    set_pfp(localStorage.getItem('pfp'));
+    set_pfp();
     open_context_menu();
 
 };
 
 // ONLOAD FUNCTION COMPLETED
 
-function set_pfp(pfp){
+function set_pfp(){
+    var pfp = localStorage.getItem('pfp');
     pfp = pfp.replaceAll(" ","+");
     document.getElementById('test_img').src = pfp;
     document.getElementById('pfp').src = pfp;
@@ -137,6 +144,7 @@ function open_context_menu(){
             list_menu.style.display = "block";
             contextMenu.style.display = "none";
             predef_context_menu.style.display = "none";
+            document.getElementById('taskclicked').value = event.target.id + "#C";
         });
     }
 
@@ -149,6 +157,8 @@ function open_context_menu(){
             list_menu.style.display = "block";
             contextMenu.style.display = "none";
             predef_context_menu.style.display = "none";
+            document.getElementById('taskclicked').value = event.target.id + "#IC";
+
         });
     }
     
@@ -647,7 +657,9 @@ function get_tasks_from_db(){
             if (record == "1"){
                 let incomplete_task = data[1];
                 let completed_task = data[2];
-                task = [completed_task, incomplete_task];
+                let inc_task_id = data[3];
+                let com_task_id = data[4];
+                task = [completed_task, incomplete_task,inc_task_id,com_task_id];
             }
             else{
                 task = "0";
@@ -682,11 +694,14 @@ function show_task_region(selected_region,task){
         if (task!= "0"){
             var completed_task = task[0].split("#;#");
             var incomplete_task = task[1].split("#;#");
+            var inc_task_id = task[2].split("#;#");
+            var com_task_id = task[3].split("#;#");
+            console.log();
     
             // CREATING INCOMPLETE TASKS LIST
             let li_code = "";
             for (i=0;i<incomplete_task.length-1;i++){
-                li_code += "<li id = IC"+(i+1)+" class = 'incomplete_task_li' onclick = 'li_clicked(this);'>"+incomplete_task[i]+"</li>";
+                li_code += "<li class = 'incomplete_task_li' id ='"+inc_task_id[i]+"' onclick = 'li_clicked(this);'>"+incomplete_task[i]+"</li>";
             }
     
             incomplete_ul_code +=li_code+"</center></ul>";
@@ -696,7 +711,7 @@ function show_task_region(selected_region,task){
     
             li_code = "";
             for (i=0;i<completed_task.length-1;i++){
-                li_code += "<li id = C"+(i+1)+" class = 'completed_task_li' onclick = 'li_clicked(this);'>"+completed_task[i]+"</li>";
+                li_code += "<li class = 'completed_task_li' id = '"+com_task_id[i]+"' onclick = 'li_clicked(this);'>"+completed_task[i]+"</li>";
             }
     
             completed_ul_code += li_code+"</center></ul>";
@@ -727,11 +742,29 @@ function add_task(){
     incomplete_task = incomplete_task.trim();
     if (incomplete_task != ""){
         var to_be_added_task = document.getElementById('to_be_added_task');
-        var li_code = "<li class = 'incomplete_task_li'  onclick = 'li_clicked(this);'>"+incomplete_task+"</li>";
-        to_be_added_task.innerHTML = li_code+to_be_added_task.innerHTML;
 
-        document.getElementById('add_task_input').value = "";
-        open_context_menu();
+        jQuery.ajax({
+            url : 'addTaskDatabase.php',
+            type: 'POST',
+            dataType: 'html',
+            data : {
+                'email' : localStorage.getItem('email'), 
+                'section': localStorage.getItem('selected'), 
+                'id' : localStorage.getItem('Id'),
+                'task' : incomplete_task
+            },
+            success(e) {
+                var task_id = e;
+                console.log(e);
+                var li_code = "<li class = 'incomplete_task_li' id='"+task_id+"'onclick = 'li_clicked(this);'>"+incomplete_task+"</li>";
+                to_be_added_task.innerHTML = li_code+to_be_added_task.innerHTML;
+        
+                document.getElementById('add_task_input').value = "";
+        
+                open_context_menu();
+            }
+        });
+        
     }
 }
 
@@ -742,6 +775,7 @@ function enter_input(event){
 }
 
 function li_clicked(data){
+
     if(data.className == "incomplete_task_li"){
         data.className = "completed_task_li";
         updateDBValues(data,"C");
@@ -756,19 +790,72 @@ function li_clicked(data){
 function updateDBValues(data, status){
     var selected_region = localStorage.getItem('selected');
     var email = localStorage.getItem('email');
+    var task_id = data.id;
     jQuery.ajax({
         type : 'POST',
-        data : {'email': email, 'selected' : selected_region, 'task' : data, 'status': status},
+        data : {'email': email, 'selected' : selected_region, 'task' : data.innerHTML ,'status': status, 'task_id': task_id},
         dataType: "html",
         url: "updateDatabaseValues.php",
         success : function(d){
             console.log(d);
         }
-
     });
 }
 
 
 function delete_task(){
-    console.log("hii");
+    var selected_list = document.getElementById('taskclicked').value;
+    var task_id = selected_list.split("#")[0];
+    var status = selected_list.split("#")[1];
+    Swal.fire({
+        title: "Task Deletion",
+        text: document.getElementById(task_id).innerHTML+' will be deleted permanently',
+        showConfirmButton: true,
+        showCancelButton: true,
+        focusCancel: true,
+        focusConfirm: false,
+        confirmButtonText: "Delete",
+        cancelButtonText: "Revert"
+    }).then((result)=>{
+        if (result.isConfirmed){
+            document.getElementById(task_id).style.display= "none";
+            jQuery.ajax({
+                type: 'POST',
+                url : 'deleteTaskDatabase.php',
+                dataType: 'html',
+                data : {
+                    'email' : localStorage.getItem('email'),
+                    'section' : localStorage.getItem('selected'),
+                    'task_id' : task_id,
+                },
+                success (e){
+                    console.log(e);
+                }
+            });
+        }
+    });
+}
+
+function open_settings(){
+    Swal.fire({
+        html : document.getElementById('settings_div').innerHTML,
+        width: "80%",
+        showConfirmButton: false,
+        showCancelButton : false
+    });
+}
+
+function copy_id(event){
+    
+    var id = localStorage.getItem('Id');
+    navigator.clipboard.writeText(id);
+    var copied_div = document.getElementById('copied_div');
+    copied_div.style.display = "block";
+    console.log(event);
+    copied_div.style.top = 160+"px";
+    copied_div.style.left = event.clientX+"px";
+}
+
+function edit_name(){
+
 }

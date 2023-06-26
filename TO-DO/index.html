@@ -34,19 +34,50 @@
 </head>
 <body id="body">
     <!-- HIDDEN ITEMS -->
-    <input style="display: none;" id = "listclicked">
-    <div id = "context_menu" >
+    <input style="display: none;" id = "listclicked"> 
+    <input style="display: none;" id = "taskclicked"> <!-- TASK CONTEXT MENU-->
+    <div id = "context_menu" >     <!-- LIST CONTEXT MENU -->
         <div class="items" onclick = "rename_list();">Rename</div>
         <div class="items" onclick = "delete_list();">Delete</div>
     </div>
-    <div id = "Note_Context_Menu">
+    <div id = "Note_Context_Menu">   <!-- PREDIFINED LISTS CONTEXT MENU NOTE -->
         <div class = "note"><b>NOTE:</b><br>You Cannot Make Changes to Predefined Lists</div>
     </div>
-    <div id = "li_menu">
+    <div id = "li_menu">  <!-- TASK CONTEXT MENU-->
         <div class="items" onclick="delete_task();">Delete</div>
     </div>
-    <img style="display: none;" id = "test_img">
-    
+    <img style="display: none;" id = "test_img">   
+    <div id = "copied_div">
+        <span id = "copied_span">Copied To Clipboard</span>
+    </div>
+
+    <div id = "settings_div" style="display: none;">
+        <center>
+        <table id = "details_table">
+            <tr>
+                <td align="left" class = 'detail_tag'>ID</td>
+                <td align="left" class = 'value' id = 'SETTINGS_ID_VALUE'></td>
+                <td class = 'function_buttons' onclick="copy_id(event);" id = "copy_funcbtn">COPY</td>
+            </tr>
+            <tr>
+                <td align="left" class = 'detail_tag'>NAME</td>
+                <td align="left" class = 'value' id = "SETTINGS_NAME_VALUE"></td>
+                <td class = 'function_buttons' onclick="edit_name();">EDIT</td>
+            </tr>
+            <tr>
+                <td align="left" class = 'detail_tag'>EMAIL</td>
+                <td align="left" class = 'value' id = 'SETTINGS_EMAIL_VALUE'></td>
+            </tr>
+            <tr>
+                <td align="left" class = 'detail_tag'>LOGIN TYPE</td>
+                <td align="left" class = 'value' id = 'SETTINGS_LOGIN_TYPE_VALUE'></td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+        </center>
+    </div>
     
     <!-- FRONT END -->
     <table class="outer_table" id = "outer_table">
@@ -79,13 +110,12 @@
         </tr>
         <tr>
             
-            <td class="inner_td" id="new_list_inner_td" >
+            <td class="inner_td" id="new_list_inner_td">
                 <div class="new_list_div sectiondiv" id="new_list_div" onclick="addnewlist();">
                     <i class="fa-regular fa-plus myicon"></i>    
                     <span class="textspan">New List</span>
                 </div>
-                
-                <i class="fa-duotone fa-gear gearicon" onclick="console.log('hi');"></i>
+                <i class="fa-duotone fa-gear gearicon" onclick="open_settings();"></i>
             </td>
             
             <td class="add_task_td" id = "add_task_td" onclick="document.getElementById('add_task_input').focus(); ">
@@ -96,6 +126,9 @@
         </tr>
 
     </table>
+
+
+
     
 </body>
 </html>

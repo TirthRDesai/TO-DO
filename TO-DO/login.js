@@ -17,7 +17,8 @@ function handleCredentialResponse(response) {
     localStorage.setItem("lname", responsePayload.family_name);
     localStorage.setItem("pfp", responsePayload.picture);
     localStorage.setItem("login_type", "google")
-
+    localStorage.setItem("selected", "My Day");
+    
     document.cookie = "Id="+responsePayload.sub;
     document.cookie = "FullName="+responsePayload.name;
     document.cookie = "Email="+responsePayload.email;

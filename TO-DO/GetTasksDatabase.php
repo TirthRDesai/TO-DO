@@ -12,6 +12,9 @@
     $completed_task = "";
     $incomplete_task = "";
     $record = "0";
+    $inc_task_id = "";
+    $com_task_id = "";
+
     $res = mysqli_query($conn,$query);
     if ($res){
         $count = mysqli_num_rows($res);
@@ -19,9 +22,11 @@
             while($row = mysqli_fetch_assoc($res)){
                 if ($row['STATUS'] == "IC"){
                     $incomplete_task .= $row['TASK']."#;#";
+                    $inc_task_id .= $row['TASK_ID']."#;#";
                 }
                 else{
-                    $completed_task .= $row['TASK']."#;#";
+                    $completed_task .= $row['TASK'] . "#;#";
+                    $com_task_id .= $row['TASK_ID'] . "#;#";
                 }
             }
             
@@ -31,5 +36,5 @@
 
     mysqli_close($conn);
     // echo $x;
-    echo "$record||$incomplete_task||$completed_task";
+    echo "$record||$incomplete_task||$completed_task||$inc_task_id||$com_task_id";
 ?>

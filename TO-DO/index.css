@@ -229,7 +229,7 @@ body::-webkit-scrollbar,body::-webkit-scrollbar-button{
 .gearicon{
     margin-left: 345px;
     font-size: 20px;
-    position: absolute;
+    position: relative;
     top: -35px;
     cursor: pointer;
     padding: 5px;
@@ -446,4 +446,65 @@ body::-webkit-scrollbar,body::-webkit-scrollbar-button{
 #to_be_added_task{
     height: fit-content;
     width: 100%;
+}
+
+
+
+/* SETTINGS */
+
+#details_table{
+    width: 80%;
+    margin-left: 20px;
+}
+
+.detail_tag, .value{
+    /* width : 50%; */
+    padding: 10px;
+    /* font-weight: bolder; */
+    font-size: 25px;
+}
+.detail_tag{
+    font-weight: bolder;
+    
+    /* border-right: 2px solid lightskyblue; */
+    font-family: cursive;
+    width: 30%;
+    color: darkviolet;
+    /* background-color: lightskyblue; */
+}
+.value{
+    font-family: 'Microsoft Uighur';
+    font-size: 35px;
+    vertical-align: middle;
+    letter-spacing: 2px;
+    /* width: 50%; */
+}
+
+.function_buttons{
+    color: blue;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-align: center;
+    cursor: pointer;
+    width: fit-content;
+
+}
+
+
+#copied_div{
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 10px;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    border-bottom-left-radius: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#copied_span{
+    font-family: cursive;
+    color: azure;
 }
