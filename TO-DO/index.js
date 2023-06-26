@@ -854,6 +854,9 @@ function copy_id(event){
     console.log(event);
     copied_div.style.top = 160+"px";
     copied_div.style.left = event.clientX+"px";
+    window.setTimeout(function(){
+        copied_div.style.display = "none";
+    },2000);
 }
 
 function edit_name(){
