@@ -1,4 +1,6 @@
 <?php
-    $data = $_POST['hello'];
-    echo "$data";
+    $x = "HELLO WORLD";
+    if(str_starts_with($x, 'H')){
+        echo "done";
+    }
 ?>

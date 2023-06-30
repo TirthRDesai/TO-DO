@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LOGIN</title>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+        
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="login.css">
+
+        
+        
+        <!-- JAVASCRIPTS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>  
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.min.js" integrity="sha512-JbRQ4jMeFl9Iem8w6WYJDcWQYNCEHP/LpOA11LaqnbJgDV6Y8oNB9Fx5Ekc5O37SwhgnNJdmnasdwiEdvMjW2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+    
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+            apiKey: "AIzaSyCqNx2wl2QoRX5ZNlwuISPllISPB0Dxu14",
+            authDomain: "login-390209.firebaseapp.com",
+            projectId: "login-390209",
+            storageBucket: "login-390209.appspot.com",
+            messagingSenderId: "1084983487070",
+            appId: "1:1084983487070:web:884d9878c45572558d22cf",
+            measurementId: "G-4EVFY9SZ39"
+            };
+    
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+        </script>
+
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+
+        <script src="login.js"></script>
+</head>
+<body>
+
+    <div>
+        <div id = "logo_holder_div">
+            <img src="LOGO.jpg" id = "logo">
+        </div>
+    
+        <div id = "form">
+            <fieldset>
+                    <h1 class = 'heading_form' id = "heading_form">LOGIN</h1>
+
+
+                    <label id = "email_id_label" class = "labels" for = "email_id">Enter Email/Login Id</label><br>
+                    <input type="text" class = "data_inp" name = "email_id" autocomplete="new-password" id = "email_id_inp" required><br>
+                    
+                    <label id = "password_label" class = "labels" for="password_inp">Enter Password</label><br>
+                    <input type="password" class = "data_inp" name = "password_inp" autocomplete="new-password" id = "password_inp" required><br>
+                    
+                    <a href = "#" style="margin-left: 25px;">Forgot Password?</a><br><br>
+                    
+                    <input type="submit" id = "submitform" value="Login" onclick="submitForm();"><br>
+                
+                
+                <div id = "login_btn_div">
+                    <div id="g_id_onload"
+                        data-client_id="1084983487070-hhh7s4jbd2fh3fqeh7qp3s1cc3fh0vbn.apps.googleusercontent.com"
+                        data-callback = "handleCredentialResponse"
+                        data-context="use"
+                        data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-shape="box"
+                        data-theme="transparent"
+                        data-size="medium"
+                        style="width: fit-content;margin: auto;"
+                        data-logo_alignment="left"
+                        data-width="280">
+                </div>
+
+
+                <span style="display: block; margin: auto;width: fit-content;margin-top: 10px;">New User? <a href = "#">Sign Up</a></span>
+        </fieldset>
+
+        </div>
+    </div>
+
+
+<div style="width: fit-content;height: fit-content; border: 2px solid black;" onclick="console.log('1')" id = "mydiv">
+    
+    
+
+</div>
+</body>
+</html>

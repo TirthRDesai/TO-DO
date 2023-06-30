@@ -6,24 +6,20 @@
     <title>Document</title>
 </head>
 <body>
-    <div id = "copied_div">
-        <span id = "copied_span">Copied To Clipboard</span>
+    <div style="height: 20px;width: 20px;" onclick = "divclick(this);" id = "mydiv">
+
     </div>
+<br>
+    <button onclick = "clickbtn();">CLICK ME</button>
+
 </body>
 </html>
 
-<style>
-    #copied_div{
-        width: fit-content;
-        height: fit-content;
-        padding: 5px 10px;
-        /* border: 2px solid black; */
-        border-radius: 10px;
-        border-bottom-left-radius: 0px;
-        background-color: rgba(128, 128, 128, 0.4);
+<script>
+    function divclick(data){
+        data.style.backgroundColor = "black";
     }
-
-    #copied_span{
-        font-family: cursive;
+    function clickbtn(){
+        document.getElementById("mydiv").click();
     }
-</style>
+</script>

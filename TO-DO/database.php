@@ -28,7 +28,7 @@
                document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
             }
            localStorage.clear();</script>';
-            echo "<script>window.location.assign('login.php');</script>";
+            echo "<script>window.location.assign('login.html');</script>";
         }
 
         $query = "select * from `user_records` where EMAIL = '$email'";
@@ -53,7 +53,7 @@
     
     }
     else{
-        echo "<script>window.location.assign('login.php');</script>";
+        echo "<script>window.location.assign('login.html');</script>";
     }
     
 ?>

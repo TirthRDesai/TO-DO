@@ -1,10 +1,13 @@
-// window.onload = function(){
-//     if(localStorage.getItem("email") != ""){
-//         window.location.assign("index.html");
-//     }
-// }
+window.onload = function(){
+    if(localStorage.getItem("email") != null && localStorage.getItem('email') != "" ){
+        window.location.assign("index.html");
+    }
+};
 
-
+function loginGoogle(){
+    console.log('hello');
+    document.getElementById('myid').click();
+}
 
 
 function handleCredentialResponse(response) {
@@ -30,3 +33,20 @@ function handleCredentialResponse(response) {
 }
 
 
+function submitForm(){
+    var email = document.getElementById('email_id_inp').value;
+    var pwd = document.getElementById('password_inp').value;
+    jQuery.ajax({
+        type: 'POST',
+        data : {'email': email, 'pwd': pwd},
+        dataType : 'html',
+        url : 'loginDatabase.php',
+        success: function(d){
+            checkUser(d);
+        }
+    });
+}
+
+function checkUser(result){
+    console.log(result);
+}

@@ -474,7 +474,7 @@ function logout_user(i, mytimer){
     }
     setTimeout(function(){
         var url = window.location.href;
-        url = url.replace("index.html", "login.php");
+        url = url.replace("index.html", "login.html");
         window.location.assign(url);
     },mytimer+1000);
 }
