@@ -3,6 +3,9 @@ window.onload = function(){
     if(localStorage.getItem('email')==null){
         logout_user(1,1000);
     }
+    if(localStorage.getItem('pfp') == null || localStorage.getItem('pfp') == ""){
+        localStorage.setItem('pfp', 'DEFAULT.jpg');
+    }
 
     document.getElementById("SETTINGS_ID_VALUE").innerHTML = localStorage.getItem('Id');
     document.getElementById("SETTINGS_NAME_VALUE").innerHTML = localStorage.getItem('fullname');

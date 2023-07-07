@@ -16,10 +16,8 @@ function handleCredentialResponse(response) {
     localStorage.setItem("Id", responsePayload.sub);
     localStorage.setItem("fullname", responsePayload.name);
     localStorage.setItem("email", responsePayload.email);
-    localStorage.setItem("fname", responsePayload.given_name);
-    localStorage.setItem("lname", responsePayload.family_name);
     localStorage.setItem("pfp", responsePayload.picture);
-    localStorage.setItem("login_type", "google")
+    localStorage.setItem("login_type", "google");
     localStorage.setItem("selected", "My Day");
     
     document.cookie = "Id="+responsePayload.sub;
@@ -42,11 +40,49 @@ function submitForm(){
         dataType : 'html',
         url : 'loginDatabase.php',
         success: function(d){
-            checkUser(d);
+            if(d.split("||").length > 2)
+            {
+                checkUser(d);
+            }
+            else{
+                alert("USER NOT FOUND");
+            }
         }
     });
 }
 
 function checkUser(result){
-    console.log(result);
+    var id = result.split("||")[0];
+    var name = result.split("||")[1];
+    var email = result.split("||")[2];
+    var pfp = result.split("||")[3];
+    var extralists = result.split("||")[4];
+
+    localStorage.setItem("Id", id);
+    localStorage.setItem("fullname", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("pfp", pfp);
+    localStorage.setItem("login_type", "form");
+    localStorage.setItem("ExtraLists", extralists);
+
+    window.location.assign('index.html');
+
+}
+
+
+function forgotPassword(){
+    document.getElementById("forgot_password_span").style.display = "none";
+    document.getElementById("password_label").style.display = "none";
+    document.getElementById("password_inp").style.display = "none";
+    document.getElementById("login_btn_div").style.display = "none";
+    document.getElementById("new_user_span").style.display = "none";
+
+    document.getElementById("submitform").value = "SEND OTP";
+    document.getElementById("submitform").onclick = sendOTP();
+    document.getElementById("submitform").style.marginTop = "-50px";
+}
+
+function sendOTP(){
+    var email = document.getElementById("email_id_inp").value;
+    
 }

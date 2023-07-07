@@ -60,18 +60,19 @@
     
         <div id = "form">
             <fieldset>
+                <form id = "myform">
                     <h1 class = 'heading_form' id = "heading_form">LOGIN</h1>
 
 
                     <label id = "email_id_label" class = "labels" for = "email_id">Enter Email/Login Id</label><br>
-                    <input type="text" class = "data_inp" name = "email_id" autocomplete="new-password" id = "email_id_inp" required><br>
+                    <input type="text" class = "data_inp" name = "email_id" autocomplete="off" id = "email_id_inp" required><br>
                     
                     <label id = "password_label" class = "labels" for="password_inp">Enter Password</label><br>
                     <input type="password" class = "data_inp" name = "password_inp" autocomplete="new-password" id = "password_inp" required><br>
+                </form>
                     
-                    <a href = "#" style="margin-left: 25px;">Forgot Password?</a><br><br>
-                    
-                    <input type="submit" id = "submitform" value="Login" onclick="submitForm();"><br>
+                <span style="margin-left: 25px;" onclick = "forgotPassword();" id = 'forgot_password_span'>Forgot Password?</span><br><br>
+                <input type="submit" id = "submitform" value="Login" onclick="submitForm();"><br>
                 
                 
                 <div id = "login_btn_div">
@@ -92,7 +93,7 @@
                 </div>
 
 
-                <span style="display: block; margin: auto;width: fit-content;margin-top: 10px;">New User? <a href = "#">Sign Up</a></span>
+                <span style="display: block; margin: auto;width: fit-content;margin-top: 10px;" id="new_user_span">New User? <a href = "#">Sign Up</a></span>
         </fieldset>
 
         </div>
